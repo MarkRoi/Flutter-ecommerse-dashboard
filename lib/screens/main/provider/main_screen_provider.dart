@@ -2,6 +2,7 @@
 import 'package:ecommerce_dashboard/screens/brands/brand_screen.dart';
 import 'package:ecommerce_dashboard/screens/sub_category/sub_category_screen.dart';
 import 'package:ecommerce_dashboard/screens/variants/variants_screen.dart';
+import 'package:ecommerce_dashboard/screens/variants_type/variants_type_screen.dart';
 
 import '../../category/category_screen.dart';
 import '../../dashboard/dashboard_screen.dart';
@@ -29,9 +30,9 @@ class MainScreenProvider extends ChangeNotifier{
       case 'Brands':
         selectedScreen = BrandScreen();
         break;
-      // case 'VariantType':
-      //   selectedScreen = VariantsTypeScreen();
-      //   break;
+      case 'VariantType':
+        selectedScreen = VariantsTypeScreen();
+        break;
       case 'Variants':
         selectedScreen = VariantsScreen();
         break;

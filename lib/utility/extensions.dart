@@ -7,6 +7,7 @@ import 'package:ecommerce_dashboard/screens/dashboard/provider/dash_board_provid
 import 'package:ecommerce_dashboard/screens/main/provider/main_screen_provider.dart';
 import 'package:ecommerce_dashboard/screens/sub_category/provider/sub_category_provider.dart';
 import 'package:ecommerce_dashboard/screens/variants/provider/variant_provider.dart';
+import 'package:ecommerce_dashboard/screens/variants_type/provider/variant_type_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +17,7 @@ extension Providers on BuildContext {
   CategoryProvider get categoryProvider => Provider.of<CategoryProvider>(this, listen: false);
   SubCategoryProvider get subCategoryProvider => Provider.of<SubCategoryProvider>(this, listen: false);
   BrandProvider get brandProvider => Provider.of<BrandProvider>(this, listen: false);
-  // VariantsTypeProvider get variantTypeProvider => Provider.of<VariantsTypeProvider>(this, listen: false);
+  VariantsTypeProvider get variantTypeProvider => Provider.of<VariantsTypeProvider>(this, listen: false);
   VariantsProvider get variantProvider => Provider.of<VariantsProvider>(this, listen: false);
   DashBoardProvider get dashBoardProvider => Provider.of<DashBoardProvider>(this, listen: false);
   // CouponCodeProvider get couponCodeProvider => Provider.of<CouponCodeProvider>(this, listen: false);

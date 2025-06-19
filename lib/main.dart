@@ -7,6 +7,7 @@ import 'package:ecommerce_dashboard/screens/main/main_screen.dart';
 import 'package:ecommerce_dashboard/screens/main/provider/main_screen_provider.dart';
 import 'package:ecommerce_dashboard/screens/sub_category/provider/sub_category_provider.dart';
 import 'package:ecommerce_dashboard/screens/variants/provider/variant_provider.dart';
+import 'package:ecommerce_dashboard/screens/variants_type/provider/variant_type_provider.dart';
 import 'package:ecommerce_dashboard/utility/constants.dart';
 import 'package:ecommerce_dashboard/utility/extensions.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => BrandProvider(context.dataProvider),
         ),
-        // ChangeNotifierProvider(create: (context) => VariantsTypeProvider(context.dataProvider)),
+        ChangeNotifierProvider(create: (context) => VariantsTypeProvider(context.dataProvider)),
         ChangeNotifierProvider(
           create: (context) => VariantsProvider(context.dataProvider),
         ),
