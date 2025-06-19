@@ -1,3 +1,4 @@
+import 'package:ecommerce_dashboard/core/data/data_provider.dart';
 import 'package:ecommerce_dashboard/screens/main/main_screen.dart';
 import 'package:ecommerce_dashboard/screens/main/provider/main_screen_provider.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => DataProvider()),
         ChangeNotifierProvider(create: (_) => MainScreenProvider()),
       ],
       child: MaterialApp(
