@@ -1,110 +1,107 @@
-import 'package:ecommerce_dashboard/core/data/data_provider.dart';
-import 'package:ecommerce_dashboard/models/category.dart';
+import '../../../core/data/data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../utility/constants.dart';
+import '../../../models/category.dart';
+import 'add_category_form.dart';
 
-
-class CategoryListSection extends StatefulWidget {
-    const CategoryListSection({
+class CategoryListSection extends StatelessWidget {
+  const CategoryListSection({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<CategoryListSection> createState() => _CategoryListSectionState();
-}
-
-class _CategoryListSectionState extends State<CategoryListSection> {
-  
-  @override
   Widget build(BuildContext context) {
-    return Container( 
-      padding: EdgeInsets.all(8.0),
-      decoration: BoxDecoration( 
-        color: Color(0xFF2A2A2A),
-        borderRadius: BorderRadius.all(Radius.circular(10)
-        ),
+    return Container(
+      padding: EdgeInsets.all(defaultPadding),
+      decoration: BoxDecoration(
+        color: secondaryColor,
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
-      child: Column( 
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [ 
-          Text( 
-            "All Categories", 
+        children: [
+          Text(
+            "All Categories",
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          SizedBox( 
+          SizedBox(
             width: double.infinity,
-            child: Consumer<DataProvider>( 
-              builder:(context, dataProvider, child) {
+            child: Consumer<DataProvider>(
+              builder: (context, dataProvider, child) {
                 return DataTable(
+                  columnSpacing: defaultPadding,
+                  // minWidth: 600,
                   columns: [
-                    DataColumn(label: Text('Category Name')),
-                    DataColumn(label: Text('Date Added')),
-                    DataColumn(label: Text('Edit')),
-                    DataColumn(label: Text('Delete')),
+                    DataColumn(
+                      label: Text("Category Name"),
+                    ),
+                    DataColumn(
+                      label: Text("Added Date"),
+                    ),
+                    DataColumn(
+                      label: Text("Edit"),
+                    ),
+                    DataColumn(
+                      label: Text("Delete"),
+                    ),
                   ],
                   rows: List.generate(
                     dataProvider.categories.length,
-                    (index) => categoryDataRow( 
-                      dataProvider.categories[index], delete:() {
-                        // Handle delete action
-                      }, edit: () {
-                        // showAddCategoryForm(context, dataProvider.categories[index]);
-                      }
-                 
-                  ),
+                    (index) => categoryDataRow(dataProvider.categories[index], delete: () {
+                      //TODO: should complete call  deleteCategory
+                    }, edit: () {
+                      showAddCategoryForm(context, dataProvider.categories[index]);
+                    }),
                   ),
                 );
               },
             ),
-          )
+          ),
         ],
       ),
     );
   }
 }
 
-
-DataRow categoryDataRow(Category CatInfo, {Function? edit, Function? delete}){
-  return DataRow( 
-    cells:[ 
-      DataCell( 
-        Row( 
-          children:[  
-            Image.network( 
-              CatInfo.image ?? '' , 
+DataRow categoryDataRow(Category CatInfo, {Function? edit, Function? delete}) {
+  return DataRow(
+    cells: [
+      DataCell(
+        Row(
+          children: [
+            Image.network(
+              CatInfo.image ?? '',
               height: 30,
-              width:30, 
-              errorBuilder:(BuildContext context, Object error, StackTrace? stackTrace) {
-                return Icon(Icons.error, color: Colors.red);
-              }
-            ), 
-            Padding( 
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(CatInfo.name ?? 'No Name'),
-            )
-            
+              width: 30,
+              errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                return Icon(Icons.error);
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+              child: Text(CatInfo.name ?? ''),
+            ),
           ],
         ),
-      ), 
-      DataCell( 
-        Text(CatInfo.createdAt ?? 'No Date')
       ),
-      DataCell( 
-        IconButton( 
-          icon: Icon(Icons.edit, color: Colors.white),
+      DataCell(Text(CatInfo.createdAt ?? '')),
+      DataCell(IconButton(
           onPressed: () {
             if (edit != null) edit();
           },
-        )
-      ),
-      DataCell( 
-        IconButton( 
-          icon: Icon(Icons.delete, color: Colors.red),
+          icon: Icon(
+            Icons.edit,
+            color: Colors.white,
+          ))),
+      DataCell(IconButton(
           onPressed: () {
             if (delete != null) delete();
           },
-        )
-      ),
-    ]
+          icon: Icon(
+            Icons.delete,
+            color: Colors.red,
+          ))),
+    ],
   );
 }

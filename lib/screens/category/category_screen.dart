@@ -1,67 +1,68 @@
-import 'package:ecommerce_dashboard/screens/category/components/category_header.dart';
-import 'package:ecommerce_dashboard/screens/category/components/category_list_section.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import '../../utility/constants.dart';
+import 'components/add_category_form.dart';
+import 'components/category_header.dart';
+import 'components/category_list_section.dart';
 
 class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: 
-    SingleChildScrollView( 
-      primary: false,
-      padding: EdgeInsets.all(8),
-      child: Column(
-        children: [
-          CategoryHeader(),
-          SizedBox(height: 20),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start, 
-            children: [ 
-              Expanded( 
-                flex: 5, 
-                child: Column( 
-                  children: [ 
-                    Row(  
-                      mainAxisAlignment: MainAxisAlignment.end, 
-                      children: [ 
-                        Expanded(
-                          child: Text(
-                          "My Categories", 
-                          style: Theme.of(context).textTheme.titleMedium,
-                          )
-                        ), 
-                        ElevatedButton.icon( 
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 8 * 1.5,
-                              vertical: 8,
+    return SafeArea(
+      child: SingleChildScrollView(
+        primary: false,
+        padding: EdgeInsets.all(defaultPadding),
+        child: Column(
+          children: [
+            CategoryHeader(),
+            SizedBox(height: defaultPadding),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 5,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "My Categories",
+                              style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
-                          onPressed: () { 
-                            // showAddCategoryForm(context, null);
-                          },
-                          icon: Icon(Icons.add),
-                          label: Text("Add New"),
-                        ), 
-                        SizedBox(width: 20), 
-                        IconButton(onPressed: (){
-                          //TODO: should complete get all categories
-                        }, icon: Icon(Icons.refresh))
-                      ],
-                    ), 
-                    SizedBox(height: 20),
-                    CategoryListSection()
-                  ],
+                          ElevatedButton.icon(
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: defaultPadding * 1.5,
+                                vertical: defaultPadding,
+                              ),
+                            ),
+                            onPressed: () {
+                              showAddCategoryForm(context, null);
+                            },
+                            icon: Icon(Icons.add),
+                            label: Text("Add New"),
+                          ),
+                          Gap(20),
+                          IconButton(
+                              onPressed: () {
+                                //TODO: should complete getAllCategory
+                              },
+                              icon: Icon(Icons.refresh)),
+                        ],
+                      ),
+                      Gap(defaultPadding),
+                      CategoryListSection(),
+                    ],
+                  ),
                 ),
-              )
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
-    ));
-
-
-
-
-    
+    );
   }
 }

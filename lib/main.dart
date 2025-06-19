@@ -1,5 +1,6 @@
 import 'package:ecommerce_dashboard/core/data/data_provider.dart';
 import 'package:ecommerce_dashboard/core/routes/app_pages.dart';
+import 'package:ecommerce_dashboard/screens/category/provider/category_provider.dart';
 import 'package:ecommerce_dashboard/screens/dashboard/provider/dash_board_provider.dart';
 import 'package:ecommerce_dashboard/screens/main/main_screen.dart';
 import 'package:ecommerce_dashboard/screens/main/provider/main_screen_provider.dart';
@@ -16,6 +17,7 @@ void main() {
     ChangeNotifierProvider(create: (context) => DataProvider()),
     ChangeNotifierProvider(create: (context) => MainScreenProvider()),
    ChangeNotifierProvider(create: (context) => DashBoardProvider(context.dataProvider)),
+   ChangeNotifierProvider(create: (context) => CategoryProvider(context.dataProvider)),
   ], child: MyApp()));
 }
 

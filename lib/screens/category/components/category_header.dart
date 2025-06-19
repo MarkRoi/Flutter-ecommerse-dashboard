@@ -1,24 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../../../utility/constants.dart';
 
 class CategoryHeader extends StatelessWidget {
-  const CategoryHeader({super.key});
+  const CategoryHeader({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row( 
-      children: [ 
-        Text( 
-          "Category", 
-          style: Theme.of(context).textTheme.titleLarge
-          ),
-        Spacer(flex: 2,), 
-        Expanded(child: SearchField( 
-          onChange: (value) {
-            // Handle search input
+    return Row(
+      children: [
+        Text(
+          "Category",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        Spacer(flex: 2),
+        Expanded(child: SearchField(
+          onChange: (val) {
+            //TODO: should complete call filterCategories
+
           },
-        )), 
+        )),
         ProfileCard()
       ],
+    );
+  }
+}
+
+class ProfileCard extends StatelessWidget {
+  const ProfileCard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: defaultPadding),
+      padding: EdgeInsets.symmetric(
+        horizontal: defaultPadding,
+        vertical: defaultPadding / 2,
+      ),
+      decoration: BoxDecoration(
+        color: secondaryColor,
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        border: Border.all(color: Colors.white10),
+      ),
+      child: Row(
+        children: [
+          Image.asset(
+            "assets/images/profile_pic.png",
+            height: 38,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+            child: Text("Angelina Jolie"),
+          ),
+          Icon(Icons.keyboard_arrow_down),
+        ],
+      ),
     );
   }
 }
@@ -26,67 +66,38 @@ class CategoryHeader extends StatelessWidget {
 class SearchField extends StatelessWidget {
   final Function(String) onChange;
 
-  const SearchField({required this.onChange});
+  const SearchField({
+    Key? key,
+    required this.onChange,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      height: 40,
-      child: TextField(
-        onChanged: onChange,
-        decoration: InputDecoration(
-          hintText: 'Search',
-          prefixIcon: Icon(Icons.search, color: Colors.grey),
-          filled: true,
-          fillColor: Colors.white12,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide.none,
-          ),
-          contentPadding: EdgeInsets.symmetric(vertical: 10),
+    return TextField(
+      decoration: InputDecoration(
+        hintText: "Search",
+        fillColor: secondaryColor,
+        filled: true,
+        border: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
-        style: TextStyle(color: Colors.white),
-      ),
-    );
-  }
-}
-
-class ProfileCard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 20,
-            backgroundImage: NetworkImage('https://via.placeholder.com/150'),
-            child: Text('AJ', style: TextStyle(color: Colors.black)),
+        suffixIcon: InkWell(
+          onTap: () {},
+          child: Container(
+            padding: EdgeInsets.all(defaultPadding * 0.75),
+            margin: EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+            decoration: BoxDecoration(
+              color: primaryColor,
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+            ),
+            child: SvgPicture.asset("assets/icons/Search.svg"),
           ),
-          SizedBox(width: 8),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Angelina Jolie',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                'admin',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
-                ),
-              ),
-            ],
-          ),
-        ],
+        ),
       ),
+      onChanged: (value) {
+        onChange(value);
+      },
     );
   }
 }
