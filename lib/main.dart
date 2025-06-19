@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MainScreenProvider()),
       ],
       child: MaterialApp(
-        title: 'Shop Dashboard',
+        debugShowMaterialGrid: false,
+        title: 'Flutter Admin Dashboard',
         theme: ThemeData.dark().copyWith(
           primaryColor: Colors.black,
           scaffoldBackgroundColor: Color(0xFF1A1A1A),
