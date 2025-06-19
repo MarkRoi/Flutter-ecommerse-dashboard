@@ -1,19 +1,14 @@
-import 'package:ecommerce_dashboard/screens/dashboard/dashboard_screen.dart';
-import 'package:ecommerce_dashboard/screens/main/components/side_menu.dart';
-import 'package:ecommerce_dashboard/screens/main/provider/main_screen_provider.dart';
+import 'provider/main_screen_provider.dart';
+import '../../utility/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'components/side_menu.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
 
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
+class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    context.dataProvider;
     return Scaffold(
       body: SafeArea(
         child: Row(
@@ -21,15 +16,16 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             Expanded(
               child: SideMenu(),
-              ),
-              Consumer<MainScreenProvider>(
-                builder: (context, provider, child) {
-                  return Expanded(
-                    flex: 5,
-                    child: provider.selectedScreen ?? DashboardScreen(),
-                  );
-                },
-              ),],
+            ),
+            Consumer<MainScreenProvider>(
+              builder: (context, provider, child) {
+                return Expanded(
+                  flex: 5,
+                  child: provider.selectedScreen,
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
