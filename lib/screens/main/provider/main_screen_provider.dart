@@ -1,4 +1,7 @@
 
+import 'package:ecommerce_dashboard/screens/brands/brand_screen.dart';
+import 'package:ecommerce_dashboard/screens/sub_category/sub_category_screen.dart';
+
 import '../../category/category_screen.dart';
 import '../../dashboard/dashboard_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,12 +22,12 @@ class MainScreenProvider extends ChangeNotifier{
       case 'Category':
         selectedScreen = CategoryScreen();
         break;
-      // case 'SubCategory':
-      //   selectedScreen = SubCategoryScreen();
-      //   break;
-      // case 'Brands':
-      //   selectedScreen = BrandScreen();
-      //   break;
+      case 'SubCategory':
+        selectedScreen = SubCategoryScreen();
+        break;
+      case 'Brands':
+        selectedScreen = BrandScreen();
+        break;
       // case 'VariantType':
       //   selectedScreen = VariantsTypeScreen();
       //   break;
