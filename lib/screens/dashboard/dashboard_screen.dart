@@ -1,116 +1,78 @@
+
+import 'package:ecommerce_dashboard/screens/dashboard/components/add_product_form.dart';
+import 'package:ecommerce_dashboard/screens/dashboard/components/dash_board_header.dart';
+import 'package:ecommerce_dashboard/screens/dashboard/components/order_details_section.dart';
+import 'package:ecommerce_dashboard/screens/dashboard/components/product_list_section.dart';
+import 'package:ecommerce_dashboard/screens/dashboard/components/product_summery_section.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import '../../utility/constants.dart';
 
 class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AppBar(
-          title: Text('Dashboard'),
-          actions: [
-            IconButton(icon: Icon(Icons.search), onPressed: () {}),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage('https://via.placeholder.com/150'),
-                child: Text('AJ'),
-              ),
-            ),
+    return SafeArea(
+      child: SingleChildScrollView(
+        primary: false,
+        padding: EdgeInsets.all(defaultPadding),
+        child: Column(
+          children: [
+            DashBoardHeader(),
+            Gap(defaultPadding),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 5,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "My Products",
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                          ),
+                          ElevatedButton.icon(
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: defaultPadding * 1.5,
+                                vertical: defaultPadding,
+                              ),
+                            ),
+                            onPressed: () {
+                              showAddProductForm(context, null);
+                            },
+                            icon: Icon(Icons.add),
+                            label: Text("Add New"),
+                          ),
+                          Gap(20),
+                          IconButton(
+                              onPressed: () {
+                                //TODO: should complete call getAllProduct
+                              },
+                              icon: Icon(Icons.refresh)),
+                        ],
+                      ),
+                      Gap(defaultPadding),
+                      ProductSummerySection(),
+                      Gap(defaultPadding),
+                      ProductListSection(),
+                    ],
+                  ),
+                ),
+                SizedBox(width: defaultPadding),
+                Expanded(
+                  flex: 2,
+                  child: OrderDetailsSection(),
+                ),
+              ],
+            )
           ],
         ),
-        Expanded(
-          child: Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Card(
-                  color: Color(0xFF2A2A2A),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('My Products', style: TextStyle(fontSize: 20)),
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Text('+ Add New'),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 10),
-                        Row(
-                          children: [
-                            Expanded(child: Text('Product Name')),
-                            Expanded(child: Text('Category')),
-                            Expanded(child: Text('Sub Category')),
-                            Expanded(child: Text('Price')),
-                            Expanded(child: Text('Edit')),
-                            Expanded(child: Text('Delete')),
-                          ],
-                        ),
-                        ...List.generate(6, (index) => ListTile(
-                          leading: Icon(Icons.phone_android),
-                          title: Text('Product ${index + 1}'),
-                          subtitle: Text('Category ${index + 1}'),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text('\$${index * 1000}.00'),
-                              IconButton(icon: Icon(Icons.edit), onPressed: () {}),
-                              IconButton(icon: Icon(Icons.delete), onPressed: () {}),
-                            ],
-                          ),
-                        )),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Card(
-                  color: Color(0xFF2A2A2A),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Orders Details', style: TextStyle(fontSize: 18)),
-                        SizedBox(height: 20),
-                        Center(
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              CircularProgressIndicator(
-                                value: 0.75,
-                                backgroundColor: Colors.grey,
-                                color: Colors.blue,
-                                strokeWidth: 10,
-                              ),
-                              Text('3', style: TextStyle(fontSize: 24, color: Colors.white)),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Text('All Orders', style: TextStyle(fontSize: 16)),
-                        Text('3 Order'),
-                        Text('Pending Orders', style: TextStyle(fontSize: 16)),
-                        Text('1 Order'),
-                        Text('Processed Orders', style: TextStyle(fontSize: 16)),
-                        Text('0 Order'),
-                        Text('Cancelled Orders', style: TextStyle(fontSize: 16)),
-                        Text('0 Order'),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
