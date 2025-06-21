@@ -4,10 +4,24 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 
-class SideMenu extends StatelessWidget {
+class SideMenu extends StatefulWidget {
   const SideMenu({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<SideMenu> createState() => _SideMenuState();
+}
+
+class _SideMenuState extends State<SideMenu> {
+  String _activeMenu = 'Dashboard';
+
+  void _onMenuTap(String menu) {
+    setState(() {
+      _activeMenu = menu;
+    });
+    context.mainScreenProvider.navigateToScreen(menu);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,72 +34,62 @@ class SideMenu extends StatelessWidget {
           DrawerListTile(
             title: "Dashboard",
             svgSrc: "assets/icons/menu_dashboard.svg",
-            press: () {
-              context.mainScreenProvider.navigateToScreen('Dashboard');
-            },
+            isActive: _activeMenu == 'Dashboard',
+            press: () => _onMenuTap('Dashboard'),
           ),
           DrawerListTile(
             title: "Category",
             svgSrc: "assets/icons/menu_tran.svg",
-            press: () {
-              context.mainScreenProvider.navigateToScreen('Category');
-            },
+            isActive: _activeMenu == 'Category',
+            press: () => _onMenuTap('Category'),
           ),
           DrawerListTile(
             title: "Sub Category",
             svgSrc: "assets/icons/menu_task.svg",
-            press: () {
-              context.mainScreenProvider.navigateToScreen('SubCategory');
-            },
+            isActive: _activeMenu == 'SubCategory',
+            press: () => _onMenuTap('SubCategory'),
           ),
           DrawerListTile(
             title: "Brands",
             svgSrc: "assets/icons/menu_doc.svg",
-            press: () {
-              context.mainScreenProvider.navigateToScreen('Brands');
-            },
+            isActive: _activeMenu == 'Brands',
+            press: () => _onMenuTap('Brands'),
           ),
           DrawerListTile(
             title: "Variant Type",
             svgSrc: "assets/icons/menu_store.svg",
-            press: () {
-              context.mainScreenProvider.navigateToScreen('VariantType');
-            },
+            isActive: _activeMenu == 'VariantType',
+            press: () => _onMenuTap('VariantType'),
           ),
           DrawerListTile(
             title: "Variants",
             svgSrc: "assets/icons/menu_notification.svg",
-            press: () {
-              context.mainScreenProvider.navigateToScreen('Variants');
-            },
+            isActive: _activeMenu == 'Variants',
+            press: () => _onMenuTap('Variants'),
           ),
           DrawerListTile(
             title: "Orders",
             svgSrc: "assets/icons/menu_profile.svg",
-            press: () {
-              context.mainScreenProvider.navigateToScreen('Order');
-            },
+            isActive: _activeMenu == 'Order',
+            press: () => _onMenuTap('Order'),
           ),
           DrawerListTile(
             title: "Coupons",
             svgSrc: "assets/icons/menu_setting.svg",
-            press: () {
-              context.mainScreenProvider.navigateToScreen('Coupon');
-            },
+            isActive: _activeMenu == 'Coupon',
+            press: () => _onMenuTap('Coupon'),
           ),
           DrawerListTile(
             title: "Posters",
             svgSrc: "assets/icons/menu_doc.svg",
-            press: () {
-              context.mainScreenProvider.navigateToScreen('Poster');
-            },
+            isActive: _activeMenu == 'Poster',
+            press: () => _onMenuTap('Poster'),
           ),
           DrawerListTile(
             title: "Notifications",
             svgSrc: "assets/icons/menu_notification.svg",
-            press: () {
-              context.mainScreenProvider.navigateToScreen('Notifications');
-            },
+            isActive: _activeMenu == 'Notifications',
+            press: () => _onMenuTap('Notifications'),
           ),
         ],
       ),
@@ -96,14 +100,15 @@ class SideMenu extends StatelessWidget {
 class DrawerListTile extends StatelessWidget {
   const DrawerListTile({
     Key? key,
-    // For selecting those three line once press "Command+D"
     required this.title,
     required this.svgSrc,
     required this.press,
+    this.isActive = false,
   }) : super(key: key);
 
   final String title, svgSrc;
   final VoidCallback press;
+  final bool isActive;
 
   @override
   Widget build(BuildContext context) {
@@ -112,12 +117,22 @@ class DrawerListTile extends StatelessWidget {
       horizontalTitleGap: 0.0,
       leading: SvgPicture.asset(
         svgSrc,
-        colorFilter: ColorFilter.mode(Colors.white54, BlendMode.srcIn),
+        colorFilter: ColorFilter.mode(
+          isActive ? Colors.white : Colors.white54,
+          BlendMode.srcIn,
+        ),
         height: 16,
       ),
       title: Text(
         title,
-        style: TextStyle(color: Colors.white54),
+        style: TextStyle(
+          color: isActive ? Colors.white : Colors.white54,
+          fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+        ),
+      ),
+      tileColor: isActive ? Colors.blue.withOpacity(0.2) : Colors.transparent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
       ),
     );
   }
