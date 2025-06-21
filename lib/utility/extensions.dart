@@ -6,6 +6,7 @@ import 'package:ecommerce_dashboard/screens/category/provider/category_provider.
 import 'package:ecommerce_dashboard/screens/coupon_code/provider/coupon_code_provider.dart';
 import 'package:ecommerce_dashboard/screens/dashboard/provider/dash_board_provider.dart';
 import 'package:ecommerce_dashboard/screens/main/provider/main_screen_provider.dart';
+import 'package:ecommerce_dashboard/screens/notification/provider/notification_provider.dart';
 import 'package:ecommerce_dashboard/screens/order/provider/order_provider.dart';
 import 'package:ecommerce_dashboard/screens/posters/provider/poster_provider.dart';
 import 'package:ecommerce_dashboard/screens/sub_category/provider/sub_category_provider.dart';
@@ -26,5 +27,5 @@ extension Providers on BuildContext {
   CouponCodeProvider get couponCodeProvider => Provider.of<CouponCodeProvider>(this, listen: false);
   PosterProvider get posterProvider => Provider.of<PosterProvider>(this, listen: false);
   OrderProvider get orderProvider => Provider.of<OrderProvider>(this, listen: false);
-  // NotificationProvider get notificationProvider => Provider.of<NotificationProvider>(this, listen: false);
+  NotificationProvider get notificationProvider => Provider.of<NotificationProvider>(this, listen: false);
 }

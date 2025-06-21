@@ -6,6 +6,7 @@ import 'package:ecommerce_dashboard/screens/coupon_code/provider/coupon_code_pro
 import 'package:ecommerce_dashboard/screens/dashboard/provider/dash_board_provider.dart';
 import 'package:ecommerce_dashboard/screens/main/main_screen.dart';
 import 'package:ecommerce_dashboard/screens/main/provider/main_screen_provider.dart';
+import 'package:ecommerce_dashboard/screens/notification/provider/notification_provider.dart';
 import 'package:ecommerce_dashboard/screens/order/provider/order_provider.dart';
 import 'package:ecommerce_dashboard/screens/posters/provider/poster_provider.dart';
 import 'package:ecommerce_dashboard/screens/sub_category/provider/sub_category_provider.dart';
@@ -44,7 +45,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => CouponCodeProvider(context.dataProvider)),
         ChangeNotifierProvider(create: (context) => PosterProvider(context.dataProvider)),
         ChangeNotifierProvider(create: (context) => OrderProvider(context.dataProvider)),
-        // ChangeNotifierProvider(create: (context) => NotificationProvider(context.dataProvider)),
+        ChangeNotifierProvider(create: (context) => NotificationProvider(context.dataProvider)),
       ],
       child: MyApp(),
     ),
