@@ -1,6 +1,8 @@
 
 import 'package:ecommerce_dashboard/screens/brands/brand_screen.dart';
+import 'package:ecommerce_dashboard/screens/coupon_code/coupon_code_screen.dart';
 import 'package:ecommerce_dashboard/screens/order/order_screen.dart';
+import 'package:ecommerce_dashboard/screens/posters/poster_screen.dart';
 import 'package:ecommerce_dashboard/screens/sub_category/sub_category_screen.dart';
 import 'package:ecommerce_dashboard/screens/variants/variants_screen.dart';
 import 'package:ecommerce_dashboard/screens/variants_type/variants_type_screen.dart';
@@ -37,12 +39,12 @@ class MainScreenProvider extends ChangeNotifier{
       case 'Variants':
         selectedScreen = VariantsScreen();
         break;
-      // case 'Coupon':
-      //   selectedScreen = CouponCodeScreen();
-      //   break;
-      // case 'Poster':
-      //   selectedScreen = PosterScreen();
-      //   break;
+      case 'Coupon':
+        selectedScreen = CouponCodeScreen();
+        break;
+      case 'Poster':
+        selectedScreen = PosterScreen();
+        break;
       case 'Order':
         selectedScreen = OrderScreen();
         break;

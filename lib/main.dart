@@ -2,10 +2,12 @@ import 'package:ecommerce_dashboard/core/data/data_provider.dart';
 import 'package:ecommerce_dashboard/core/routes/app_pages.dart';
 import 'package:ecommerce_dashboard/screens/brands/provider/brand_provider.dart';
 import 'package:ecommerce_dashboard/screens/category/provider/category_provider.dart';
+import 'package:ecommerce_dashboard/screens/coupon_code/provider/coupon_code_provider.dart';
 import 'package:ecommerce_dashboard/screens/dashboard/provider/dash_board_provider.dart';
 import 'package:ecommerce_dashboard/screens/main/main_screen.dart';
 import 'package:ecommerce_dashboard/screens/main/provider/main_screen_provider.dart';
 import 'package:ecommerce_dashboard/screens/order/provider/order_provider.dart';
+import 'package:ecommerce_dashboard/screens/posters/provider/poster_provider.dart';
 import 'package:ecommerce_dashboard/screens/sub_category/provider/sub_category_provider.dart';
 import 'package:ecommerce_dashboard/screens/variants/provider/variant_provider.dart';
 import 'package:ecommerce_dashboard/screens/variants_type/provider/variant_type_provider.dart';
@@ -39,9 +41,8 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => VariantsProvider(context.dataProvider),
         ),
-        // ChangeNotifierProvider(create: (context) => DashBoardProvider(context.dataProvider)),
-        // ChangeNotifierProvider(create: (context) => CouponCodeProvider(context.dataProvider)),
-        // ChangeNotifierProvider(create: (context) => PosterProvider(context.dataProvider)),
+        ChangeNotifierProvider(create: (context) => CouponCodeProvider(context.dataProvider)),
+        ChangeNotifierProvider(create: (context) => PosterProvider(context.dataProvider)),
         ChangeNotifierProvider(create: (context) => OrderProvider(context.dataProvider)),
         // ChangeNotifierProvider(create: (context) => NotificationProvider(context.dataProvider)),
       ],
